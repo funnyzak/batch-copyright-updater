@@ -3,8 +3,10 @@
  * @description: 使用Node为，项目文件夹添加版权信息（删除文件头已有的版权信息，添加新的版权信息）
  * @created 2023-04
  * @author Leon
+ * @email silenceace@gmail.com
  * @usage node addCopyright.js
- * @usage node addCopyright.js /path/to/directory "Leon" "silenceace@gmail.com" ".ts,.tsx,.js"
+ * @usage node addCopyright.js /path/to/directory "Leon" "“youremail@domain.com" ".ts,.tsx,.js"
+ * @usage curl -sSL https://raw.githubusercontent.com/funnyzak/batch-copyright-updater/main/addCopyright.js | node /dev/stdin /path/to/directory "leon" “youremail@domain.com” ".tsx,.ts" 
  */
 
 const fs = require('fs')
