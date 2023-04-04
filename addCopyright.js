@@ -39,6 +39,11 @@ const _COPYRIGHT_TEMPLATE_LIST = [
  */
 
 `,
+  `/**
+ * Created by ${AUTHOR}<${EMAIL}> at {{createdDate}}.
+ */
+
+`,
 ];
 
 const COPYRIGHT_TEMPLATE =
