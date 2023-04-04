@@ -8,14 +8,14 @@
 
 ```bash
 # 本地执行
-node addCopyright.js path/to/directory AUTHOR EMAIL FILE_TYPES
+node addCopyright.js path/to/directory AUTHOR EMAIL FILE_TYPES COPYRIGHT_TEMPLATE_INDEX
 
-node script.js /path/to/directory "leon" “youremail@domain.com” ".tsx,.ts" 
+node script.js /path/to/directory "leon" “youremail@domain.com” ".tsx,.ts" 0
 
 # 一键执行
-curl -sSL https://raw.githubusercontent.com/funnyzak/batch-copyright-updater/main/addCopyright.js | node /dev/stdin BASE_PATH AUTHOR FILE_TYPES COPYRIGHT_TEMPLATE
+curl -sSL https://raw.githubusercontent.com/funnyzak/batch-copyright-updater/main/addCopyright.js | node /dev/stdin BASE_PATH AUTHOR FILE_TYPES COPYRIGHT_TEMPLATE_INDEX
 
-curl -sSL https://raw.githubusercontent.com/funnyzak/batch-copyright-updater/main/addCopyright.js | node /dev/stdin /path/to/directory "leon" “youremail@domain.com” ".tsx,.ts" 
+curl -sSL https://raw.githubusercontent.com/funnyzak/batch-copyright-updater/main/addCopyright.js | node /dev/stdin /path/to/directory "leon" “youremail@domain.com” ".tsx,.ts" 0
 ```
 
 ## 模板
@@ -24,22 +24,24 @@ curl -sSL https://raw.githubusercontent.com/funnyzak/batch-copyright-updater/mai
 
 ```plain
 /**
- * Created by ${AUTHOR}<${EMAIL}> on {{createdDate}}.
+ * Created by ${AUTHOR}<${EMAIL}> at {{createdDate}}.
+ * Last modified at {{lastModifiedDate}}
  */
+```
 
-````
-
-其他参考模板：
+模板 2，可通过传入 `1` 作为 `COPYRIGHT_TEMPLATE_INDEX` 参数来使用：
 
 ```plain
 /**
  * @file {{filename}}
- * @description 
+ * @description
  * @created {{createdDate}}
+ * @lastModified {{lastModifiedDate}}
  * @author ${AUTHOR}
  * @email ${EMAIL}
  * @copyright Copyright (c) {{year}}
  */
+
 ```
 
 ## 版权
