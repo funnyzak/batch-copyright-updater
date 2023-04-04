@@ -54,12 +54,24 @@ const COPYRIGHT_TEMPLATE =
 let successCount = 0;
 let failureCount = 0;
 
+function formatDate(date) {
+  const year = date.getFullYear();
+  const month = (date.getMonth() + 1).toString().padStart(2, '0');
+  const day = date.getDate().toString().padStart(2, '0');
+  const hour = date.getHours().toString().padStart(2, '0');
+  const minute = date.getMinutes().toString().padStart(2, '0');
+  const second = date.getSeconds().toString().padStart(2, '0');
+  return `${year}-${month}-${day} ${hour}:${minute}:${second}`;
+}
+
 /**
  * 添加版权信息到文件头部
  * @param {string} filePath 文件路径
  */
 function addCopyright(filePath) {
-  const [createdDate] = execSync(
+  const stats = fs.statSync(filePath);
+
+  let [createdDate] = execSync(
     `git log --diff-filter=A --format=%ad --date=format:'%Y-%m-%d %H:%M:%S' --reverse -- ${filePath} | head -1`,
     {
       encoding: 'utf-8',
@@ -67,13 +79,17 @@ function addCopyright(filePath) {
     },
   ).split('\n');
 
-  const [lastModifiedDate] = execSync(
+  let [lastModifiedDate] = execSync(
     `git log -1 --format=%cd --date=format:'%Y-%m-%d %H:%M:%S' ${filePath}`,
     {
       encoding: 'utf-8',
       cwd: BASE_PATH,
     },
   ).split('\n');
+
+  createdDate = createdDate || formatDate(new Date(stats.birthtime));
+
+  lastModifiedDate = lastModifiedDate || formatDate(new Date(stats.mtime));
 
   const [createYear] = createdDate.split('-');
 
